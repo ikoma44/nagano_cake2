@@ -14,10 +14,10 @@
         <tbody>
           <% @items.each do |item| %>
             <tr>
-              <td><%= item.item_id %></td>
+              <td><%= item.id %></td>
               <td><%= item.name %></td>
               <td><%= item.price %></td>
-              <td><%= item.genre_id %></td>
+              <td><%= item.genre.name %></td>
               <td><%= item.is_active %></td>
             </tr>
           <% end %>

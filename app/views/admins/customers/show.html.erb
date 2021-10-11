@@ -1,0 +1,64 @@
+<main>
+  <p id="notice"></p>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <h2>
+        <%= customer.last_name %>
+        <%= customer.first_name %>
+        の会員詳細
+      </h2>
+
+
+        <table class="table table-striped">
+
+          <div class="form-group">
+            <label for="customer_customer_id">会員ID</label>
+            <%= customer.customer_id %>
+          </div>
+
+          <div class="form-group">
+            <label for="customer_name">氏名</label>
+            <%= customer.last_name %>
+            <%= customer.first_name %>
+          </div>
+
+          <div class="form-group">
+            <label for="customer_name_kana">フリガナ</label>
+            <%= customer.last_name_kana %>
+            <%= customer.first_name_kana %>
+          </div>
+
+          <div class="form-group">
+            <label for="customer_postal_code">郵便番号</label>
+            <%= customer.postal_code %>
+          </div>
+
+          <div class="form-group">
+            <label for="customer_address">住所</label>
+            <%= customer.address %>
+          </div>
+
+          <div class="form-group">
+            <label for="customer_telephone_number">電話番号</label>
+            <%= customer.telephone_number %>
+          </div>
+
+          <div class="form-group">
+            <label for="customer_email">メールアドレス</label>
+            <%= customer.email %>
+          </div>
+
+          <div class="form-group">
+            <label for="customer_is_active">会員ステータス</label>
+            <%= customer.is_active %>
+          </div>
+
+          <div class="form-group">
+            <!--%= link_to "編集する", edit_admins_customer_path %-->
+            <!--%= link_to "注文履歴一覧を見る", ルート未_path %-->
+          </div>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
