@@ -18,7 +18,9 @@ class Admins::ItemsController < ApplicationController
   end
 
   def update
+    @item = Item.find(params[:id])
     @item.update(item_params)
+    @item.save
     redirect_to admins_item_path(@item.id)
   end
 
