@@ -1,1 +1,65 @@
-<h1>トップページ</h1>
+
+<% flash.each do |key, value| %>
+    <p class="alert alert-<%= key %>">
+      <%= value %>
+    </p>
+  <% end %>
+
+
+<div class='container-field my-4'>
+  <div class='row mx-4'>
+    <div class='col-md-1'>
+    <table border="1" width="150" height="180">
+      <br><br>
+      <tr align="center">
+        <th>ジャンル検索</th>
+      </tr>
+      <tr>
+        <td>
+          <% @genres.each do |genre| %>
+            <%= genre.name %><br />
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    </div>
+    <div class='col-md-9 offset-md-1'>
+      <div class='row'>
+      <div class="main-visual">
+        <div class="main-visual-content">
+          <br><br>
+          <p class="h1">ようこそ、ながのCAKEへ！</p>
+          <p class="main-visual-text">
+            このサイトは、ケーキ販売のECサイトとなります。<br>
+            会員ではない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要となります。
+          </p>
+        </div>
+      </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3'>
+          <h4 class="mt-2 mb-4">
+            新着商品
+          </h4>
+        </div>
+      </div>
+      <div class='row'>
+      <% @items.each do |item| %>
+      <div class='col-md-3'>
+        <%= link_to item_path(item.id), class: "item_#{item.id}" do %>
+          <p><%= attachment_image_tag product, :image, size: "270x200", fallback: "logo.png" %></p>
+        <% end %>
+        <p><%= link_to item.name, item_path(item.id), class: "item_#{item.id}" %></p>
+        <p>¥<%= item.add_tax_price.to_s(:delimited) %></p>
+      </div>
+      <% end %>
+    </div>
+    <div class='row'>
+      <div class="col text-right">
+      <!--%= link_to "全ての商品を見る >", items_path %-->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
