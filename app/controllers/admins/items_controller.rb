@@ -1,38 +1,44 @@
 class Admins::ItemsController < ApplicationController
 
   def index
-    @items = Item.all
-    @items = Item.all.page(params[:page]).per(10)
+    @items = Item.page(params[:page])
   end
 
   def new
     @item = Item.new
   end
 
-  def edit
-    @item = Item.find(params[:id])
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to admins_item_path(@item.id)
+    else
+      render :new
+    end
   end
 
   def show
     @item = Item.find(params[:id])
+    @genre = Genre.find(@item.genre_id)
   end
 
   def update
     @item = Item.find(params[:id])
-    @item.update(item_params)
-    @item.save
-    redirect_to admins_item_path(@item.id)
+    if @item.update(item_params)
+      redirect_to admins_item_path(@item)
+    else
+      render :edit
+    end
   end
 
-  def create
-    @item = Item.new(item_params)
-    @item.save
-    redirect_to admins_item_path(@item.id)
+  def edit
+    @item = Item.find(params[:id])
   end
 
   private
   def item_params
-    params.require(:item).permit(:genre_id, :name, :image_id, :introduction, :price, :is_active)
+    params.require(:item).permit(:genre_id, :name, :price,
+    :introduction, :image, :is_active)
   end
 
 end

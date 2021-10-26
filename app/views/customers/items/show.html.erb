@@ -1,0 +1,56 @@
+<div class='container-field my-4'>
+  <div class='row mx-4'>
+    <div class='col-md-2'>
+      <table border="1" width="150" height="180">
+        <tr align="center">
+          <th>ジャンル検索</th>
+        </tr>
+        <tr>
+          <td>
+            <% @genres.each do |genre| %>
+              <%= genre.name %><br />
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class='col-md-9'>
+      <div class='row'>
+        <div class='col-md-4'>
+          <%= attachment_image_tag @item, :image, size: "280x200", fallback: "logo.png" %>
+        </div>
+        <div class='col-md-6'>
+          <div class='row h3 mb-3'>
+            <%= @item.name %>
+          </div>
+          <div class='row mb-3'>
+            <%= @item.introduction %>
+          </div>
+          <div class='row h5 mb-3 d-flex align-items-end'>
+            ￥<%= @item.add_tax_price.to_s(:delimited)  %><span style="font-size:13px">（税込）</span>
+            <% if @item.is_active == true %>
+            <% elsif @item.is_active == false %>
+              （売切れ）
+            <% end %>
+          </div>
+          <div class='row'>
+            <% if @item.is_active == true %>
+              <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+              <% if member_signed_in? %>
+                <%= f.hidden_field :item_id, :value => @item.id %>
+                <%= f.select :quantity,[["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"]] ,class:"form-control" %>
+                <%= f.submit 'カートに入れる' ,class: 'btn btn-success' %>
+              <% else %>
+                <%= f.select :quantity,[["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"]] ,class:"form-control" %>
+                <%= f.submit 'カートに入れる' ,class: 'btn btn-primary' %>
+                <p class='font-weight-bold mt-2'>※カートに商品を追加するにはログインが必要です</p>
+
+              <% end %>
+              <% end %>
+            <% end %>
+          </div>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>

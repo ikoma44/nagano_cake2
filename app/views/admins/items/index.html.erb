@@ -1,28 +1,48 @@
- <div>
-   <div class="col-md-8 offset-md-1">
-      <h2>商品一覧</h2>
-      <table class="table table-striped">
-        <thead>
+<br><br>
+<div class='container'>
+  <div class='row my-4'>
+    <div class='col-md-2'>
+      <h5 class="offset-md-1 bg-light text-center">商品一覧</h5>
+    </div>
+    <div class='col-md-9 text-right'>
+      <button type="button" class="btn btn-light rounded-circle p-0" style="width:2rem;height:2rem;">
+        <%= link_to "+", new_admins_item_path ,class: "text-secondary h4"%>
+      </button>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-12'>
+      <table class='table table-hover table-inverse'>
+        <thead class='table-secondary'>
           <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
+            <th scope="col-md-1">商品ID</th>
+            <th scope="col-md-4">商品名</th>
+            <th scope="col-md-1">税抜価格</th>
+            <th scope="col-md-4">ジャンル</th>
+            <th scope="col-md-1">ステータス</th>
           </tr>
         </thead>
         <tbody>
           <% @items.each do |item| %>
             <tr>
               <td><%= item.id %></td>
-              <td><%= item.name %></td>
-              <td><%= item.price %></td>
+              <td><%= link_to item.name, admins_item_path(item.id) %></td>
+              <td><%= item.price.to_s(:delimited) %></td>
               <td><%= item.genre.name %></td>
-              <td><%= item.is_active %></td>
+              <td>
+                <% if item.is_active == true %>
+                  <p class="text-success font-weight-bold">販売中</p>
+                <% elsif item.is_active == false %>
+                  <p class="text-secondary font-weight-bold">販売停止中</p>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
-        <%= paginate @items %>
       </table>
-   </div>
- </div>
+      <ul class="pagination justify-content-center">
+        <%= paginate @items %>
+      </ul>
+    </div>
+  </div>
+</div>

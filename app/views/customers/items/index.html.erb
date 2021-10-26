@@ -1,0 +1,42 @@
+<br><br>
+<div class='container-field my-4'>
+  <div class='row mx-4'>
+    <div class='col-md-2'>
+    <table border="1" width="150" height="180">
+      <tr align="center">
+        <th>ジャンル検索</th>
+      </tr>
+      <tr>
+        <td>
+          <% @genres.each do |genre| %>
+            <%= genre.name %><br />
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    </div>
+    <div class='col-md-10'>
+      <div class='row'>
+        <div class='col-md-'>
+        <span style="font-size:30px">商品一覧</span>
+        <span style="font-size:20px">（全<%= @items.count %>件）</span>
+        <p></p>
+        </div>
+      </div>
+      <div class='row'>
+        <% @items.each do |item| %>
+          <div class='col-md-3'>
+            <%= link_to item_path(item.id), class: "product_#{product.id}" do %>
+              <p><%= attachment_image_tag item, :image, size: "270x200", fallback: "logo.png" %></p>
+            <% end %>
+            <p><%= link_to item.name, item_path(item.id), class: "product_#{product.id}" %></p>
+            <p>¥<%= item.add_tax_price.to_s(:delimited) %></p>
+          </div>
+        <% end %>
+      </div>
+      <ul class="pagination justify-content-center">
+        <!--%= paginate @items %-->
+      </ul>
+    </div>
+  </div>
+</div>

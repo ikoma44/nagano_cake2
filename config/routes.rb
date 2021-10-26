@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   
   scope module: :customers do
   get '/customers/unsubscribe' => "customers#unsubscribe"
-  get '/customers/withdraw' => "customers#withdraw"
+  patch '/customers/withdraw' => "customers#withdraw"
   resources :customers, only:[:show, :edit, :update]
+  resources :addresses, only:[:index, :edit, :create, :update, :destroy]
+  resources :items, only:[:index, :show]
   end
   
   root to: 'homes#top'

@@ -1,51 +1,63 @@
-<main>
-  <p id="notice"></p>
-  <div class="container px-5 px-sm-0">
-    <div class="row">
-      <h2>商品詳細</h2>
-      <div class="col-md-3">
-
-        <!--%= attachment_image_tag @item, :image_id, :fill, 50, 50,fallback: "no_image.jpg" %-->
-
-
+<div class="container">
+  <div class='row my-4'>
+    <div class='col-md-2'>
+      <h5 class="bg-light text-center">商品詳細</h5>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-4'>
+      <%= attachment_image_tag @item, :image, size: "280x200", fallback: "logo.png" %>
+    </div>
+    <div class='col-md-8'>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "商品名" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @item.name %>
+        </div>
       </div>
-        <div class="col-md-8 offset-md-1">
-          <table class="table table-striped">
-
-          <div class="form-group">
-            <label for="item_name">商品名</label>
-            <%= @item.name %>
-          </div>
-
-          <div class="form-group">
-            <label for="item_introduction">商品説明</label>
-            <%= @item.introduction %>
-          </div>
-
-          <div class="form-group">
-            <label for="item_genre_id">ジャンル</label>
-            <%= @item.genre.name %>
-          </div>
-
-          <div class="form-group">
-            <label for="item_price">税込価格</br>
-              (税抜価格)
-            </label>
-            <%= @item.add_tax_price.to_s(:dalimited) %>
-            ( <%= @item.price %> ) 円
-          </div>
-
-          <div class="form-group">
-            <label for="item_is_active">販売ステータス</label>
-            <%= @item.is_active %>
-          </div>
-
-          <div class="form-group">
-            <%= link_to "編集する", edit_admins_item_path %>
-          </div>
-          </table>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "商品説明" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @item.introduction %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "ジャンル" %>
+        </div>
+        <div class='col-md-0'>
+          <%= @genre.name %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-4'>
+          <%= "税込価格" %><br />
+          <%= "(税抜価格)" %>
+        </div>
+        <div class='col-md-0 d-flex align-items-center h5'>
+          <%= @item.add_tax_price.to_s(:delimited)  %>（<%= @item.price.to_s(:delimited)  %>）円
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 mb-5'>
+          <%= "販売ステータス" %>
+        </div>
+        <div class='col-md-0'>
+          <% if @item.is_active == true %>
+            <p class="text-success font-weight-bold">販売中</p>
+          <% elsif @item.is_active == false %>
+            <p class="text-secondary font-weight-bold">販売停止中</p>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-</main>
+  <div class='text-center'>
+    <%= link_to "編集する", edit_admins_item_path(@item), class: 'btn btn-success' %>
+  </div>
+</div>
+<br>

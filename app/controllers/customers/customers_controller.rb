@@ -15,7 +15,7 @@ class Customers::CustomersController < ApplicationController
     
   end      
   
-  def confirm
+  def unsubscribe
   end
   
   def withdraw
@@ -29,7 +29,7 @@ class Customers::CustomersController < ApplicationController
 private
 
   def customer_params
-   params.require(:member).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :telephone_number, :postal_code, :email, :address, :is_active)
+   params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :telephone_number, :postal_code, :email, :address, :is_active)
   end
   
 end

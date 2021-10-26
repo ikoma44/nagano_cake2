@@ -1,0 +1,89 @@
+  <div class='container'>
+    <br><br><br>
+      <h4>会員情報編集</h4><br>
+    
+    <%= form_with model:@customer,local:true do |f| %>
+    <div class='row'>
+      <div class="col-md-2 offset-md-1">
+        名前 
+      </div>
+      <div class="col-md-1 text-right">
+        <%= f.label :（姓） %>
+      </div>
+      <div class="col-md-3">
+        <%= f.text_field :last_name, class: 'form-control', placeholder: "会員", autofocus: true %>
+      </div>
+        
+      <div class="col-md-1 text-right">
+        <%= f.label :（名） %>
+      </div>
+      <div class="col-md-3">
+        <%= f.text_field :first_name, class: 'form-control', placeholder: "太郎", autofocus: true %>
+      </div>
+    </div><br>
+    
+    <div class='row'>
+      <div class="col-md-2 offset-md-1">
+        フリガナ
+      </div>
+      <div class="col-md-1 text-right">
+        <%= f.label :（セイ） %>
+      </div>
+      <div class="col-md-3">
+        <%= f.text_field :last_name_kana, class: 'form-control', placeholder: "カイイン", autofocus: true %>
+      </div>
+      <div class="col-md-1 text-right">
+        <%= f.label :（メイ） %>
+      </div>
+      <div class="col-md-3">
+        <%= f.text_field :first_name_kana, class: 'form-control', placeholder: "タロウ", autofocus: true %>
+      </div>
+    </div><br>  
+      
+    <div class='row'>
+      <div class="col-md-2 offset-md-1">
+        <%= f.label :メールアドレス %>
+      </div>
+      <div class="col-md-5 offset-md-1 mr-auto"> 
+        <%= f.email_field :email, class: 'form-control', placeholder: "naganocake@example.com", autofocus: true %>
+      </div>
+      </div><br>  
+        
+    <div class='row'>  
+      <div class="col-md-2 offset-md-1">
+        <%= f.label :郵便番号（ハイフンなし） %>
+      </div>
+      <div class="col-md-3 offset-md-1 mr-auto">
+        <%= f.text_field :postal_code, class: 'form-control', placeholder: "1234567", autofocus: true %>
+      </div>
+      </div><br>
+      
+    <div class='row'>
+      <div class="col-md-2 offset-md-1">
+        <%= f.label :住所 %>
+      </div>
+      <div class="col-md-5 offset-md-1 mr-auto">
+        <%= f.text_field :address, class: 'form-control', placeholder: "東京都渋谷区◯◯◯◯◯◯", autofocus: true %>
+      </div>
+      </div><br> 
+        
+    <div class='row'>
+      <div class="col-md-2 offset-md-1"> 
+        <%= f.label :電話番号（ハイフンなし） %>
+      </div>
+      <div class="col-md-3 offset-md-1 mr-auto">
+        <%= f.text_field :telephone_number, class: 'form-control', placeholder: "09012345678", autofocus: true %>
+      </div>
+    </div><br>
+      
+    <div class='row'>
+      <div class="col-md-3 offset-md-3">
+        <%= f.submit "編集内容を保存",class: 'btn btn-success btn-sm' %>
+      </div>
+      <div class="col-md-2 offset-md-1 mr-auto">
+    <%= link_to "退会する", customers_unsubscribe_path,class: 'btn btn-danger btn-sm' %>
+      </div>
+    </div>
+    <% end %>
+    <br>
+  </div>
