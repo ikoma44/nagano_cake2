@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2021_10_09_041224) do
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.integer "cart_item_id"
     t.integer "item_id"
     t.integer "customer_id"
     t.integer "amount"

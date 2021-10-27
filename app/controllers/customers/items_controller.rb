@@ -6,8 +6,9 @@ class Customers::ItemsController < ApplicationController
   end
 
   def show
+    @customer = current_customer
     @item = Item.find(params[:id])
-    #@cart_item = CartItem.new
+    @cart_item = CartItem.new
     @genre = Genre.find(@item.genre_id)
     @genres = Genre.all
   end
