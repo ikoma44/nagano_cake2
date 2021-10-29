@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row my-4">
+    <h5 class="bg-light">注文情報確認</h5>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class="table table-borderd">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 30%">商品名</th>
+            <th style="width: 20%">単価(税込)</th>
+            <th style="width: 20%">数量</th>
+            <th style="width: 20%">小計</th>
+          </tr>
+        </thead>
+        <% @cart_items.each do |cart_item| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= attachment_image_tag cart_item.item, :image, size: "40x40", fallback: "logo.png" %>
+              <%= cart_item.item.name %>
+            </td>
+            <td><%= ((cart_item.item.price*1.10).floor).to_s(:delimited) %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= ((cart_item.item.price*1.10).floor * cart_item.amount).to_s(:delimited) %></td>
+          </tr>
+        </tbody>
+      <% end %>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table table-borderd">
+        <thead class="thead-light">
+    　<tr>
+        <th style="width: 20%">送料</th>
+        <td style="width: 20%"><%= @shipping_cost %></td>
+      </tr>
+      <tr>
+        <th style="width: 20%">商品合計</th>
+        <td style="width: 20%"><!--%= @order.order_detail.price.to_s(:delimited) %--></td>
+      </tr>
+      <tr>
+        <th style="width: 20%">請求金額</th>
+        <td style="width: %"><!--%= @order.total_payment.to_s(:delimited) %--></td>
+      </tr>
+      </thead>
+      </table>
+    </div>
+
+
+    <div class="col-md-7 offset-md-1 my-4">
+      <table>
+        <thead>
+          <tr>
+            <th>支払方法</th>
+            <td><%= @order.payment_method %></td>
+          </tr>
+          <tr>
+            <th>お届け先</th>
+            <td>
+              〒<%= @order.postal_code %> <%= @order.address %>
+              <%= @order.name %>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
