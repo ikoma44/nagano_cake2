@@ -1,3 +1,4 @@
+<br><br>
 <div class="container">
   <div class="row my-4">
     <h5 class="bg-light">注文情報確認</h5>
@@ -14,6 +15,7 @@
             <th style="width: 20%">小計</th>
           </tr>
         </thead>
+        <% total = 0 %>
         <% @cart_items.each do |cart_item| %>
         <tbody>
           <tr>
@@ -24,6 +26,7 @@
             <td><%= ((cart_item.item.price*1.10).floor).to_s(:delimited) %></td>
             <td><%= cart_item.amount %></td>
             <td><%= ((cart_item.item.price*1.10).floor * cart_item.amount).to_s(:delimited) %></td>
+              <% total += ((cart_item.item.price*1.10).floor * cart_item.amount) %>
           </tr>
         </tbody>
       <% end %>
@@ -41,11 +44,16 @@
       </tr>
       <tr>
         <th style="width: 20%">商品合計</th>
-        <td style="width: 20%"><!--%= @order.order_detail.price.to_s(:delimited) %--></td>
+        <td style="width: 20%"><%= total %>円
+          <!--%= @order.order_detail.price.to_s(:delimited) %-->
+        </td>
       </tr>
       <tr>
         <th style="width: 20%">請求金額</th>
-        <td style="width: %"><!--%= @order.total_payment.to_s(:delimited) %--></td>
+        <td style="width: %">
+          <%= total + @shipping_cost %>
+          <!--%= @order.total_payment.to_s(:delimited) %-->
+         </td>
       </tr>
       </thead>
       </table>
@@ -68,6 +76,19 @@
         </thead>
       </table>
     </div>
+  </div>
+  <div class="text-center">
+    <%= form_with model: @order, url: orders_path, local:true do |f| %>
+      <%= f.hidden_field :customer_id, value: current_customer.id %>
+      <%= f.hidden_field :total_payment, value: total + @shipping_cost %>
+      <%= f.hidden_field :shipping_cost, value: @shipping_cost %>
+      <%= f.hidden_field :status, value: "入金待ち" %>
+      <%= f.hidden_field :payment_method, value: @order.payment_method %>
+      <%= f.hidden_field :postal_code, value: @order.postal_code %>
+      <%= f.hidden_field :address, value: @order.address %>
+      <%= f.hidden_field :name, value: @order.name %>
+      <%= f.submit "注文を確定する",class: "btn btn-success" %>
+    <% end %>
   </div>
 </div>
 <br>

@@ -39,32 +39,20 @@ class Customers::OrdersController < ApplicationController
       @order_detail.order_id = @order.id
       @order_detail.item_id = cart_item.item_id
       @order_detail.amount = cart_item.amount
-      @order_detail.price = cart_item.amount.add_tax_price
+      #@order_detail.price = cart_item.amount * price
       @order_detail.save
     end
     current_customer.cart_items.destroy_all
-    redirect_to complete_orders_path
+    redirect_to orders_complete_path
   end
 
   def complete
   end
 
   def index
-    @orders = Order.where(customer_id: current_customer.id)
-    @orders.each do |order|
-      @order_details = order.order_details
-      @order_details.each do |order_detail|
-        @total = order_detail.price * order_detail.amount
-      end
-    end
-    @shipping_cost = 800
-    @total_payment = @order.order_details.price + @shipping_cost
   end
 
   def show
-    @order = Order.find(params[:id])
-    @order_details = @order.order_details
-    @shipping_cost = 800
   end
 
   private
