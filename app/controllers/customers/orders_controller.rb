@@ -39,7 +39,7 @@ class Customers::OrdersController < ApplicationController
       @order_detail.order_id = @order.id
       @order_detail.item_id = cart_item.item_id
       @order_detail.amount = cart_item.amount
-      #@order_detail.price = cart_item.amount * price
+      @order_detail.price = cart_item.item.price
       @order_detail.save
     end
     current_customer.cart_items.destroy_all
@@ -50,9 +50,15 @@ class Customers::OrdersController < ApplicationController
   end
 
   def index
+    @orders = Order.where(customer_id: current_customer.id)
+    @shipping_cost = 800
+    #@total_payment = @total + @shipping_cost
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
+    @shipping_cost = 800
   end
 
   private

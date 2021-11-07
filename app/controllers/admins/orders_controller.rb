@@ -3,14 +3,7 @@ class Admins::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details
-    @total = 0
-    @order_details.each do |order_detail|
-      @mini_total = 0
-      @price = order_detail.price
-      @quantity = order_detail.quantity
-      @mini_total = @price * @quantity
-      @total += @mini_total
-    end
+    @shipping_cost = 800
   end
   
   def update
@@ -25,7 +18,7 @@ class Admins::OrdersController < ApplicationController
   end
   
   def order_params
-    params.require(:order).permit(:status)
+    params.require(:order).permit(:customer_id, :postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status)
   end
   
 end

@@ -45,14 +45,12 @@
       <tr>
         <th style="width: 20%">商品合計</th>
         <td style="width: 20%"><%= total %>円
-          <!--%= @order.order_detail.price.to_s(:delimited) %-->
         </td>
       </tr>
       <tr>
         <th style="width: 20%">請求金額</th>
         <td style="width: %">
           <%= total + @shipping_cost %>
-          <!--%= @order.total_payment.to_s(:delimited) %-->
          </td>
       </tr>
       </thead>
