@@ -8,17 +8,16 @@ class Customers::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    @customer = current_customer
-    if params[:order][:address] == "0"
-      @order.postal_code = @customer.postal_code
-      @order.address = @customer.address
-      @order.name = @customer.last_name + @customer.first_name
-    elsif params[:order][:address] == "1"
-      @address = Address.find(@sta)
+    if params[:order][:order_address] == "0"
+      @order.postal_code = current_customer.postal_code
+      @order.address = current_customer.address
+      @order.name = current_customer.last_name + current_customer.first_name
+    elsif params[:order][:order_address] == "1"
+      @address = Address.find(params[:id])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
       @order.name = @address.name
-    elsif params[:order][:address] == "2"
+    elsif params[:order][:order_address] == "2"
       @order.postal_code = @order.postal_code
       @order.address = @order.address
       @order.name = @order.name
@@ -64,7 +63,7 @@ class Customers::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:customer_id, :postal_code, :address, :name, :pshipping_cost, :total_payment, :payment_method, :status)
+    params.require(:order).permit(:customer_id, :postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status)
   end
   
 end

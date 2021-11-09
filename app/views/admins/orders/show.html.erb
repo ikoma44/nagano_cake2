@@ -11,7 +11,7 @@
     </div>
     <div class="col">
       <%= link_to admins_customers_path(@order.customer) do %>
-        <!--%= @order.customer.last_name %--> <!--%= @order.customer.first_name %-->
+        <%= @order.customer.last_name %> <%= @order.customer.first_name %>
       <% end %>
     </div>
   </div>
@@ -69,13 +69,13 @@
       <% @order_details.each do |order_detail| %>
       <tr>
         <td><%= order_detail.item.name %></td>
-        <td><%= order_detail.price %></td>
+        <td><%= (order_detail.price * 1.10).to_i %></td>
         <td><%= order_detail.amount %></td>
-        <td><%= order_detail.price.to_i * order_detail.amount.to_i %></td>
+        <td><%= (order_detail.price * 1.10).to_i * order_detail.amount.to_i %></td>
         <%= form_with model: order_detail, url: admins_order_detail_path(@order, order_detail), method: :patch, local:true do |f| %>
           <td><%= f.select :making_status, OrderDetail.making_statuses.keys.to_a %></td>
           <td><%= f.submit "更新", class: "btn btn-success" %></td>
-          <% total += ((order.order_detail.price*1.10) * order.order_detail.amount) %>
+          <% total += ((order_detail.price*1.10).to_i * order_detail.amount) %>
         <% end %>
       </tr>
       <% end %>

@@ -1,0 +1,44 @@
+<div class='container'>
+  <div class='row my-4'>
+    <div class='offset-1'>
+      <h3>注文履歴一覧</h3>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-12'>
+      <table class='table table-bordered'>
+        <thead class='thead-light'>
+          <tr>
+            <th style='width: 14%'>注文日</th>
+            <th style='width: 35%'>配送先</th>
+            <th style='width: 14%'>注文商品</th>
+            <th style='width: 11%'>支払金額</th>
+            <th style='width: 14%'>ステータス</th>
+            <th style='width: 14%'>注文詳細</th>
+          </tr>
+        </thead>
+        <% @orders.each do |order| %>
+        <tbody>
+          <tr>
+            <td class='font-weight-bold'><%= order.created_at.strftime('%Y/%m/%d') %></td>
+            <td class='font-weight-bold'>
+              <%= order.postal_code %><br>
+              <%= order.address %><br>
+              <%= order.name %>
+            </td>
+            <td class='font-weight-bold'>
+              <% order.order_details.each do |order_detail| %>
+                <%= order_detail.item.name %><br>
+              <% end %>
+            </td>
+            <td class='font-weight-bold'><%= order.total_payment %></td>
+            <td class='font-weight-bold'><%= order.status %></td>
+            <td class='font-weight-bold'><%= link_to "表示する", order_path(order), class: "btn btn-primary" %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
