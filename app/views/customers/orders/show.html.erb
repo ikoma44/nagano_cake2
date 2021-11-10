@@ -66,9 +66,9 @@
         <tbody>
           <tr>
             <td class='font-weight-bold'><%= order_detail.item.name %></td>
-            <td class='font-weight-bold'><%= order_detail.price %></td>
+            <td class='font-weight-bold'><%= (order_detail.price * 1.10).to_i %></td>
             <td class='font-weight-bold'><%= order_detail.amount %></td>
-            <td class='font-weight-bold'><%= (order_detail.price * order_detail.amount) %></td>
+            <td class='font-weight-bold'><%= (order_detail.price * order_detail.amount * 1.10).to_i %></td>
           </tr>
         </tbody>
         <% end %>

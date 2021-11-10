@@ -10,7 +10,7 @@ class Admins::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_details = @order.order_details
     if @order.update(order_params)
-      @order.order_details.update(production_status: "製作待ち") if @order.status == "入金確認"
+      @order.order_details.update(making_status: "製作待ち") if @order.status == "入金確認"
       redirect_to request.referer
     else
       redirect_to request.referer

@@ -19,16 +19,16 @@ Rails.application.routes.draw do
   end
   
   scope module: :customers do
-  resources :customers, only:[:show, :edit, :update]
   get '/customers/unsubscribe' => "customers#unsubscribe"
   patch '/customers/withdraw' => "customers#withdraw"
+  resources :customers, only:[:show, :edit, :update]
   resources :addresses, only:[:index, :edit, :create, :update, :destroy]
   resources :items, only:[:index, :show]
-  resources :cart_items, only:[:index, :create, :show, :destroy]
   delete '/cart_items/destroy_all' => "cart_items#destroy_all"
+  resources :cart_items, only:[:index, :create, :show, :destroy]
   get '/orders/complete' => "orders#complete"
-  resources :orders, only:[:index, :show, :new, :create]
   post '/orders/confirm' => "orders#confirm"
+  resources :orders, only:[:index, :show, :new, :create]
   end
   
   root to: 'homes#top'

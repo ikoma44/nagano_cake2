@@ -72,7 +72,7 @@
         <td><%= (order_detail.price * 1.10).to_i %></td>
         <td><%= order_detail.amount %></td>
         <td><%= (order_detail.price * 1.10).to_i * order_detail.amount.to_i %></td>
-        <%= form_with model: order_detail, url: admins_order_detail_path(@order, order_detail), method: :patch, local:true do |f| %>
+        <%= form_with model: order_detail, url: admins_order_detail_path(order_detail), method: :patch, local:true do |f| %>
           <td><%= f.select :making_status, OrderDetail.making_statuses.keys.to_a %></td>
           <td><%= f.submit "更新", class: "btn btn-success" %></td>
           <% total += ((order_detail.price*1.10).to_i * order_detail.amount) %>

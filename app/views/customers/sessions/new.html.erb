@@ -3,8 +3,11 @@
   <div class='row'>
     <div class='col-md-11 offset-md-1' >
       <br><br><br>
+      
     <h4>ログイン</h4><br>
     
+      <%= flash[:error] %>
+      
       <h5>会員の方はこちらからログイン</h5><br>
       
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

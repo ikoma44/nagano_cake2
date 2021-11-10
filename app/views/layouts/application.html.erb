@@ -22,19 +22,19 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDropdown">
           <ul class="navbar-nav me-auto mb-7 mb-lg-0 offset-md-7">
             <% if customer_signed_in? %>
-              <li><!--%= link_to 'マイページ', member_path(current_member),class: 'nav-link active' %--></li>
-              <li><!--%= link_to '商品一覧', products_path,class: 'nav-link active' %--></li>
-              <li><!--%= link_to 'カート', cart_items_path,class: 'nav-link active' %--></li>
+              <li><%= link_to 'マイページ', customer_path(current_customer),class: 'nav-link active' %></li>
+              <li><%= link_to '商品一覧', items_path,class: 'nav-link active' %></li>
+              <li><%= link_to 'カート', cart_items_path,class: 'nav-link active' %></li>
               <li><%= link_to 'ログアウト', destroy_customer_session_path,class: 'nav-link active', method: :delete %></li>
             <% elsif admin_signed_in? %>
               <li><%= link_to '商品一覧', admins_items_path,class: 'nav-link active' %></li>
               <li><%= link_to '会員一覧', admins_customers_path,class: 'nav-link active' %></li>
-              <li><!--%= link_to '注文履歴一覧', admins_root_path,class: 'nav-link active' %--></li>
+              <li><%= link_to '注文履歴一覧', admins_path,class: 'nav-link active' %></li>
               <li><%= link_to 'ジャンル一覧', admins_genres_path,class: 'nav-link active' %></li>
               <li><%= link_to 'ログアウト', destroy_admin_session_path,class: 'nav-link active', method: :delete %></li>
             <% else %>
               <li><%= link_to 'About', about_path,class: 'nav-link active' %></li>
-              <li><!--%= link_to '商品一覧', products_path,class: 'nav-link active' %--></li>
+              <li><%= link_to '商品一覧', admins_items_path,class: 'nav-link active' %></li>
               <li><%= link_to '新規登録', new_customer_registration_path,class: 'nav-link active' %></li>
               <li><%= link_to 'ログイン', new_customer_session_path,class: 'nav-link active' %></li>
             <% end %>
